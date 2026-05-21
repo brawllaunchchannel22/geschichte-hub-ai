@@ -1478,11 +1478,15 @@ footer {
   }
   
   .hero h1 {
-    font-size: 2.1rem;
+    font-size: 2rem;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
   
   .section-header h2 {
-    font-size: 2rem;
+    font-size: 1.75rem;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
   
   .timeline-container {
@@ -1491,6 +1495,35 @@ footer {
   
   .xp-recent-notification {
     display: none;
+  }
+
+  /* Prevent horizontal overflow on small screens */
+  .decision-option-card,
+  .sandbox-card,
+  .consequence-card,
+  .glass-card {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    max-width: 100%;
+  }
+
+  .decision-option-title {
+    font-size: 0.95rem;
+  }
+
+  .timeline-date {
+    font-size: 1.2rem;
+  }
+
+  /* Smaller quiz options text on mobile */
+  .quiz-option-btn {
+    font-size: 0.9rem;
+    padding: 0.8rem 1rem;
+  }
+
+  /* Keep spickzettel readable */
+  .spick-content p, .spick-content li {
+    font-size: 0.9rem;
   }
 }
 
@@ -2129,6 +2162,20 @@ html[data-theme="dark"] .klausur-formulierung h5 {
 @media (max-width: 480px) {
   .audio-focus-btn span {
     display: none;
+  }
+  .xp-bar-container {
+    gap: 0.75rem;
+  }
+  .container {
+    padding: 0 1rem;
+  }
+  .level-badge {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+  .xp-info-labels {
+    font-size: 0.65rem;
   }
 }
 

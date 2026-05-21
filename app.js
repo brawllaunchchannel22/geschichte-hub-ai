@@ -11,7 +11,7 @@ const timelineEvents = [
       "Es löste die sogenannte **Julikrise** aus, eine vierwöchige diplomatische Kettenreaktion der europäischen Großmächte.",
       "**Blankoscheck:** Deutschland versicherte Österreich-Ungarn am 5. Juli bedingungslose Bündnistreue für ein hartes Vorgehen gegen Serbien."
     ],
-    tip: "Unterscheide in der Klausur strikt zwischen dem **Anlass** (Sarajevo) und den **strukturellen Ursachen** (Imperialismus, Nationalismus, Bündnissysteme, Wettrüsten)."
+    tip: "Unterscheide in deiner Analyse strikt zwischen dem **Anlass** (Sarajevo) und den **strukturellen Ursachen** (Imperialismus, Nationalismus, Bündnissysteme, Wettrüsten)."
   },
   {
     year: "August 1914",
@@ -180,6 +180,38 @@ const flashcardsData = [
   {
     term: "Rentenmark",
     definition: "Eine provisorische Währung, die im November 1923 zur Beendigung der Hyperinflation eingeführt wurde. Sie war durch Grundbesitz und Sachwerte gedeckt. Sie stellte das Vertrauen in das Geld wieder her und rettete die Währung."
+  },
+  {
+    term: "Zweifrontenkrieg",
+    definition: "Ein Krieg, der gleichzeitig an zwei räumlich getrennten Grenzen (Fronten) geführt werden muss. Im Ersten Weltkrieg musste Deutschland zeitgleich im Westen (Frankreich/UK) und Osten (Russland) kämpfen."
+  },
+  {
+    term: "Steckrübenwinter 1916/17",
+    definition: "Der katastrophale Hungerwinter in Deutschland, ausgelöst durch Missernten und die britische Seeblockade. Die Bevölkerung ernährte sich notgedrungen fast ausschließlich von Steckrüben, was zu Hunderttausenden Opfern führte."
+  },
+  {
+    term: "Novemberrevolution",
+    definition: "Der Umsturz im November 1918, der zum Ende der Monarchie (Abdankung des Kaisers) und zur Ausrufung der ersten deutschen Republik führte, ausgehend vom Kieler Matrosenaufstand."
+  },
+  {
+    term: "Ebert-Groener-Pakt",
+    definition: "Geheimbündnis vom 10. November 1918 zwischen dem SPD-Vorsitzenden Friedrich Ebert und General Wilhelm Groener (OHL). Sichert der neuen Regierung die Unterstützung des Militärs gegen linke Rätekräfte."
+  },
+  {
+    term: "Hyperinflation 1923",
+    definition: "Der völlige Wertverlust der Mark durch massives Gelddrucken zur Finanzierung des passiven Widerstands gegen die Ruhrbesetzung. Vernichtete die Ersparnisse des Mittelstands komplett."
+  },
+  {
+    term: "Goldene Zwanziger",
+    definition: "Die Phase relativer wirtschaftlicher und politischer Stabilisierung sowie kultureller Blüte in der Weimarer Republik zwischen 1924 und 1929, eingeleitet durch die Währungsreform von 1923."
+  },
+  {
+    term: "Kapp-Putsch 1920",
+    definition: "Ein rechtsradikaler Putschversuch unter Wolfgang Kapp und General Lüttwitz gegen die Weimarer Regierung. Scheiterte nach wenigen Tagen am historischen Generalstreik der Gewerkschaften."
+  },
+  {
+    term: "Weimarer Koalition",
+    definition: "Das tragende Bündnis demokratischer Parteien (SPD, Zentrum, DDP) in der Anfangsphase der Weimarer Republik, das die demokratische Verfassung ausarbeitete und stützte."
   }
 ];
 
@@ -493,15 +525,157 @@ const quizQuestions = [
       { text: "Die Einführung der Zensur für rechte Zeitungen durch das Justizministerium", correct: false }
     ],
     explanation: "Die Richter stammten meist aus der Kaiserzeit und hassten die Republik. Während der linke Spartakusaufstand drakonisch bestraft wurde, bekamen rechte Putschisten wie Adolf Hitler nach seinem Putschversuch lächerlich milde Mindeststrafen."
+  },
+  {
+    question: "Warum gilt die erste Schlacht an der Marne im September 1914 als der entscheidende Wendepunkt an der Westfront?",
+    options: [
+      { text: "Weil dort der erste Friedensvertrag des Krieges unterzeichnet wurde", correct: false },
+      { text: "Weil sie den deutschen Vormarsch stoppte und das Scheitern des Schlieffen-Plans besiegelte", correct: true },
+      { text: "Weil dort die Alliierten kapitulierten und Deutschland freien Lauf ließen", correct: false },
+      { text: "Weil Frankreich dort erstmals Panzer im Kampf einsetzte", correct: false }
+    ],
+    explanation: "Die Schlacht an der Marne stoppte den deutschen Vormarsch auf Paris. Dadurch scheiterte der Schlieffen-Plan endgültig. Der Krieg erstarrte im jahrelangen, verlustreichen Stellungskrieg."
+  },
+  {
+    question: "Welches strategische Ziel verfolgte die OHL mit der Wiederaufnahme des uneingeschränkten U-Boot-Kriegs im Februar 1917?",
+    options: [
+      { text: "Die Entdeckung neuer Handelsrouten im Atlantik", correct: false },
+      { text: "Großbritannien durch Aushungern binnen Monaten zur Kapitulation zu zwingen, bevor die USA militärisch eingreifen konnten", correct: true },
+      { text: "Den Seetransport russischer Truppen über die Ostsee zu verhindern", correct: false },
+      { text: "Die Errichtung deutscher Militärbasen in Südamerika", correct: false }
+    ],
+    explanation: "Die OHL wusste, dass dies den Kriegseintritt der USA provozieren würde, spekulierte aber darauf, England durch die totale Versenkung aller Versorgungsschiffe schnell in die Knie zu zwingen. Eine fatale Fehlkalkulation."
+  },
+  {
+    question: "Was war der Hauptgrund für den katastrophalen 'Steckrübenwinter' 1916/17 in Deutschland?",
+    options: [
+      { text: "Ein Verbot des Staates, Kartoffeln anzubauen", correct: false },
+      { text: "Die alliierte Seeblockade und eine schlechte Kartoffelernte durch Krautfäule", correct: true },
+      { text: "Der Export aller deutschen Lebensmittel an die verbündete Türkei", correct: false },
+      { text: "Eine künstliche Verknappung durch die Rüstungskonzerne", correct: false }
+    ],
+    explanation: "Durch die britische Blockade war Deutschland von Rohstoff- und Lebensmittelimporten abgeschnitten. Als die Kartoffelernte 1916 durch Nässe und Fäule verdarb, mussten die Menschen auf minderwertige Futtersteckrüben ausweichen."
+  },
+  {
+    question: "Welchen Meilenstein der Gleichberechtigung brachte die Novemberrevolution 1918 in Deutschland?",
+    options: [
+      { text: "Die Abschaffung des Adels und der Monarchie in ganz Europa", correct: false },
+      { text: "Die Einführung des allgemeinen aktiven und passiven Wahlrechts für Frauen ab 20 Jahren", correct: true },
+      { text: "Das Recht für Frauen, in der Reichswehr als Offiziere zu dienen", correct: false },
+      { text: "Die Verstaatlichung aller Großbetriebe und Rüstungsfirmen", correct: false }
+    ],
+    explanation: "Der Rat der Volksbeauftragten verkündete im November 1918 das allgemeine Wahlrecht für alle Bürger ab 20 Jahren – explizit auch für Frauen. Bei der Wahl zur Nationalversammlung 1919 stimmten Frauen erstmals."
+  },
+  {
+    question: "Was vereinbarten Friedrich Ebert und General Wilhelm Groener im geheimen Ebert-Groener-Pakt vom 10. November 1918?",
+    options: [
+      { text: "Die Einberufung einer gemeinsamen Regierung aus Generälen und SPD-Politikern", correct: false },
+      { text: "Das Militär stützt die neue Regierung; im Gegenzug bleiben die alten militärischen Strukturen und die OHL unangetastet", correct: true },
+      { text: "Die sofortige Verhaftung des Kaisers Wilhelm II. durch die Reichswehr", correct: false },
+      { text: "Ein geheimes Angriffsbündnis gegen die neu entstandene Republik Polen", correct: false }
+    ],
+    explanation: "Der Pakt sicherte der neuen Regierung militärischen Schutz gegen linke Rätekräfte. Kritiker bemängeln jedoch, dass dadurch die demokratiefeindlichen kaiserlichen Militäreliten ihre Macht im neuen Staat behielten."
+  },
+  {
+    question: "Warum tagte die verfassungsgebende Nationalversammlung ab Februar 1919 in Weimar statt in Berlin?",
+    options: [
+      { text: "Weil Berlin durch feindliche alliierte Truppen besetzt war", correct: false },
+      { text: "Wegen der bürgerkriegsähnlichen Unruhen, Streiks und Kämpfe im revolutionären Berlin", correct: true },
+      { text: "Weil Weimar geografisch exakt im Mittelpunkt des neuen Reiches lag", correct: false },
+      { text: "Weil die Abgeordneten die Nähe zu Goethes Kulturstätten suchten", correct: false }
+    ],
+    explanation: "In Berlin tobten heftige Machtkämpfe und bürgerkriegsähnliche Unruhen (wie der Spartakusaufstand). Um eine sichere, ungestörte Ausarbeitung der Verfassung zu gewährleisten, wich man in das ruhige Weimar aus."
+  },
+  {
+    question: "Welchen gravierenden territorialen Verlust musste Deutschland laut dem Versailler Vertrag hinnehmen?",
+    options: [
+      { text: "Die Abtrennung Bayerns als eigenständiges Königreich", correct: false },
+      { text: "Die Rückgabe von Elsass-Lothringen an Frankreich und die Schaffung des Polnischen Korridors", correct: true },
+      { text: "Die Besetzung und Abtrennung des gesamten Gebiets östlich der Elbe", correct: false },
+      { text: "Die Abtretung Helgolands an Dänemark", correct: false }
+    ],
+    explanation: "Deutschland verlor etwa 13% seines Staatsgebiets. Besonders schmerzhaft war die Rückgabe von Elsass-Lothringen an Frankreich sowie der Polnische Korridor, der Ostpreußen territorial vom Reich abschnitt."
+  },
+  {
+    question: "Welche militärische Beschränkung sah der Versailler Vertrag von 1919 für Deutschland vor?",
+    options: [
+      { text: "Das vollständige Verbot jeglicher eigener Polizeikräfte", correct: false },
+      { text: "Die Begrenzung des Heeres auf 100.000 Soldaten, Verbot von Panzern und Kampfflugzeugen sowie Entmilitarisierung des Rheinlands", correct: true },
+      { text: "Die Verpflichtung, alle deutschen Kriegsschiffe an Frankreich abzutreten", correct: false },
+      { text: "Die Pflicht zur Stationierung von US-Truppen in allen Großstädten", correct: false }
+    ],
+    explanation: "Um Deutschland dauerhaft militärisch unschädlich zu machen, wurde die Reichswehr auf ein Berufsheer von 100.000 Mann geschrumpft. Schwere Waffen waren verboten, das strategisch wichtige Rheinland wurde entmilitarisiert."
+  },
+  {
+    question: "Wer trug durch eine Verlesung vor dem Untersuchungsausschuss 1919 maßgeblich zur Verbreitung der Dolchstoßlegende bei?",
+    options: [
+      { text: "Adolf Hitler als junger Gefreiter der Armee", correct: false },
+      { text: "Generalfeldmarschall Paul von Hindenburg", correct: true },
+      { text: "Kaiser Wilhelm II. aus seinem Exil in den Niederlanden", correct: false },
+      { text: "Der SPD-Politiker Philipp Scheidemann", correct: false }
+    ],
+    explanation: "Hindenburg verlas im November 1919 vor dem Untersuchungsausschuss der Nationalversammlung eine Erklärung, in der er behauptete, ein englisches Zitat belege, dass das deutsche Heer 'von hinten erdolcht' wurde. Dies gab der Lüge enormen Auftrieb."
+  },
+  {
+    question: "Wie reagierte die Reichsregierung auf den französisch-belgischen Einmarsch ins Ruhrgebiet im Januar 1923?",
+    options: [
+      { text: "Sie erklärte Frankreich sofort den Krieg und mobilisierte die Reichswehr", correct: false },
+      { text: "Sie rief die Bevölkerung zum passiven Widerstand (Generalstreik) bei vollem Lohnersatz durch den Staat auf", correct: true },
+      { text: "Sie trat geschlossen zurück und überließ den Franzosen die Verwaltung", correct: false },
+      { text: "Sie schloss ein geheimes Bündnis mit Großbritannien gegen Frankreich", correct: false }
+    ],
+    explanation: "Da Deutschland militärisch machtlos war, rief Kanzler Cuno zum passiven Widerstand auf. Millionen Arbeiter streikten. Der Staat bezahlte ihre Löhne durch massiven Gelddruck, was direkt in die Hyperinflation führte."
+  },
+  {
+    question: "Was verbarg sich hinter der sogenannten 'Schwarzen Reichswehr' in der frühen Weimarer Zeit?",
+    options: [
+      { text: "Ein Geheimbund von afrikanischen Soldaten im Rheinland", correct: false },
+      { text: "Illegale, geheime Truppenverbände, die unter Umgehung des Versailler Vertrags von Militärs aufgestellt wurden", correct: true },
+      { text: "Die persönliche Leibgarde des Reichspräsidenten Friedrich Ebert", correct: false },
+      { text: "Ein paramilitärischer Arm der Kommunistischen Partei", correct: false }
+    ],
+    explanation: "Die Reichswehrführung unterhielt heimlich bewaffnete Einheiten, die offiziell nicht existierten, um die Beschränkungen des Versailler Vertrags (100.000 Mann) zu umgehen. Sie waren oft extrem republikfeindlich gesinnt."
+  },
+  {
+    question: "Welche direkte Konsequenz folgte aus dem scheiternden Hitler-Ludendorff-Putsch im November 1923?",
+    options: [
+      { text: "Adolf Hitler wurde sofort aus Deutschland nach Österreich ausgewiesen", correct: false },
+      { text: "Die NSDAP wurde reichsweit verboten und Hitler verfasste in milder Festungshaft in Landsberg sein Buch 'Mein Kampf'", correct: true },
+      { text: "Ludendorff wurde zum neuen Kanzler ernannt, um die Rechten zu beruhigen", correct: false },
+      { text: "Der Reichstag beschloss die sofortige Auflösung der bürgerlichen Justiz", correct: false }
+    ],
+    explanation: "Hitler wurde zu einer sehr milden Festungshaft in Landsberg verurteilt. Dort diktierte er 'Mein Kampf' und änderte seine Taktik: Statt eines gewaltsamen Umsturzes wollte er die Macht künftig auf scheinbar legalem Weg erringen."
+  },
+  {
+    question: "Was meint die historische Charakterisierung der Weimarer Republik als eine 'Demokratie ohne Demokraten'?",
+    options: [
+      { text: "Dass es in der Republik verboten war, demokratische Parteien zu gründen", correct: false },
+      { text: "Dass tragende Säulen wie Justiz, Verwaltung und Militär dem Kaiserreich anhingen und die Republik ablehnten oder untergruben", correct: true },
+      { text: "Dass bei den Wahlen kaum Bürger von ihrem Stimmrecht Gebrauch machten", correct: false },
+      { text: "Dass die Verfassung die Gründung einer Monarchie vorsah", correct: false }
+    ],
+    explanation: "Obwohl Weimar eine moderne, demokratische Verfassung hatte, blieben die alten Eliten (Richter, Beamte, Offiziere) im Amt. Sie verachteten die Demokratie zutiefst und schützten rechtsradikale Feinde des Staates."
+  },
+  {
+    question: "Welche entscheidende politische Maßnahme ergriff Gustav Stresemann als Reichskanzler im Herbst 1923, um Deutschland zu retten?",
+    options: [
+      { text: "Er trat dem Völkerbund bei und trat das Ruhrgebiet formell ab", correct: false },
+      { text: "Er beendete trotz massiver Proteste von rechts und links den passiven Ruhrkampf, um die Staatsfinanzen zu sanieren", correct: true },
+      { text: "Er verbot alle Gewerkschaften und fror alle Löhne ein", correct: false },
+      { text: "Er setzte das Frauenwahlrecht aus, um konservative Wähler zu beruhigen", correct: false }
+    ],
+    explanation: "Stresemann erkannte, dass der passive Ruhrwiderstand den Staat ruinierte. Gegen heftigste Widerstände und Putschdrohungen brach er den Ruhrstreik ab. Dies war die Voraussetzung für die anschließende Währungsreform."
   }
 ];
 
 // --- DYNAMIC RENDERING LOGIC ---
 
-// Helper to parse Markdown bold syntax (**text**) to HTML <strong> tags safely
+// Helper to parse Markdown bold (**text**) and italic (*text*) syntax to HTML tags safely
 function formatText(text) {
   if (typeof text !== 'string') return text;
-  return text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  let formatted = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  formatted = formatted.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  return formatted;
 }
 
 // Fisher-Yates array shuffling utility
@@ -871,8 +1045,8 @@ const decisionScenarios = [
         title: "Blankoscheck ausstellen",
         text: "Du versicherst Österreich-Ungarn die bedingungslose Bündnistreue des Reiches für ein kompromissloses Vorgehen gegen Serbien.",
         historical: true,
-        header: "📜 Historischer Blankoscheck (Kriegs guilt)",
-        consequence: "Du stellst den Blankoscheck aus. Bestärkt durch Berlin stellt Österreich-Ungarn ein unannehmbares Ultimatum. Russland mobilisiert zum Schutz Serbiens. Die Kettenreaktion der Julikrise gerät außer Kontrolle: Es kommt zum Ausbruch des Ersten Weltkriegs. **Klausurrelevanz:** Dies ist das Kernargument für Deutschlands Hauptschuld nach der Fritz-Fischer-These (Kriegsschuldfrage Art. 231)."
+        header: "📜 Historischer Blankoscheck (Julikrise)",
+        consequence: "Du stellst den Blankoscheck aus. Bestärkt durch Berlin stellt Österreich-Ungarn ein unannehmbares Ultimatum. Russland mobilisiert zum Schutz Serbiens. Die Kettenreaktion der Julikrise gerät außer Kontrolle: Es kommt zum Ausbruch des Ersten Weltkriegs. **Geschichtliche Einordnung:** Dies ist das Kernargument für Deutschlands Hauptverantwortung beim Kriegsausbruch (Kriegsschuldfrage Art. 231)."
       },
       {
         title: "Internationale Konferenz fordern",
@@ -893,7 +1067,7 @@ const decisionScenarios = [
         text: "Du startest den Angriff auf Verdun. Ziel ist es, Frankreich durch massive Materialüberlegenheit systematisch ausbluten zu lassen.",
         historical: true,
         header: "💀 Die Materialschlacht ('Ausbluten von Verdun')",
-        consequence: "Du befiehlst den Angriff. Es entbrennt die grausamste Materialschlacht der Geschichte. Über 300.000 französische und deutsche Soldaten sterben im 'Mahlstrom von Verdun' – ohne jeden Geländegewinn. **Klausurrelevanz:** Verdun wird zum Symbol des industrialisierten Todes, in dem der einzelne Soldat entpersönlicht und zum bloßen 'Menschenmaterial' in Schützengräben degradiert wird."
+        consequence: "Du befiehlst den Angriff. Es entbrennt die grausamste Materialschlacht der Geschichte. Über 300.000 französische und deutsche Soldaten sterben im 'Mahlstrom von Verdun' – ohne jeden Geländegewinn. **Geschichtliche Einordnung:** Verdun wird zum Symbol des industrialisierten Todes, in dem der einzelne Soldat entpersönlicht und zum bloßen 'Menschenmaterial' in Schützengräben degradiert wird."
       },
       {
         title: "Heimliche Friedenssondierung einleiten",
@@ -905,7 +1079,28 @@ const decisionScenarios = [
     ]
   },
   {
-    year: "1918",
+    year: "1918 (Okt.)",
+    role: "Admiral Franz von Hipper (Seekriegsleitung)",
+    desc: "Oktober 1918. Die deutsche OHL hat bereits die Niederlage eingestanden und Friedensverhandlungen eingeleitet. Doch die Seekriegsleitung will die Flotte zu einer letzten, aussichtslosen Schlacht gegen die britische Royal Navy schicken – einen 'ehrenvollen Opfergang'. In Wilhelmshaven und Kiel weigern sich die Matrosen, für diesen sinnlosen Tod auszulaufen. Triffst du die folgenschwere Weichenstellung?",
+    options: [
+      {
+        title: "Flottenbefehl mit Gewalt erzwingen",
+        text: "Du bestehst auf dem Gehorsam, lässt meuternde Matrosen verhaften und drohst mit Waffengewalt.",
+        historical: true,
+        header: "⚓ Der Kieler Matrosenaufstand & Die Revolution",
+        consequence: "Du versuchst, den Befehl durchzusetzen, doch das bricht den letzten Funken Loyalität. Aus dem Protest wird ein bewaffneter Aufstand: Matrosen und Arbeiter schließen sich zusammen, besetzen Kiel und tragen die Revolution binnen weniger Tage durch ganz Deutschland. Das Kaiserreich bricht zusammen. **Geschichtliche Einordnung:** Der Matrosenaufstand war der unmittelbare Zünder der Novemberrevolution, die zum Sturz der Monarchie führte."
+      },
+      {
+        title: "Flottenbefehl absagen",
+        text: "Du erkennst die Sinnlosigkeit des 'Opfergangs', verweigerst den Flottenbefehl und schützt das Leben deiner Männer.",
+        historical: false,
+        header: "⚠️ Alternatives Deeskalations-Szenario",
+        consequence: "Du sagst die letzte Schlacht ab. Die Matrosen kehren friedlich in ihre Kasernen zurück. Es kommt nicht zum Kieler Aufstand. Zwar bleibt Deutschland militärisch besiegt, doch das Kaiserreich gewinnt wertvolle Zeit. Ohne den revolutionären Zündfunken aus Kiel verzögert sich der Sturz der Monarchie, und ein geordneter Übergang zu einer parlamentarischen Monarchie unter Max von Baden wird wahrscheinlicher."
+      }
+    ]
+  },
+  {
+    year: "1918 (9. Nov.)",
     role: "Philipp Scheidemann (SPD-Vorstand)",
     desc: "9. November 1918. Das Kaiserreich bricht zusammen, die Fronten kapitulieren. In Berlin herrscht revolutionäres Chaos. Du stehst am Fenster des Reichstags. Du erfährst, dass der radikale Kommunist Karl Liebknecht in zwei Stunden die sozialistische Räterepublik nach russischem Vorbild ausrufen will. Das Schicksal der Demokratie steht auf dem Spiel...",
     options: [
@@ -914,7 +1109,7 @@ const decisionScenarios = [
         text: "Du trittst sofort ans Fenster und rufst um 14:00 Uhr die parlamentarisch-demokratische deutsche Republik aus.",
         historical: true,
         header: "🏛️ Die doppelte Ausrufung der Republik",
-        consequence: "Du rufst die Republik aus. Die Menschenmenge jubelt frenetisch. Du kommst Karl Liebknecht (der um 16:00 Uhr die sozialistische Räterepublik verkündet) knapp zuvor. Die bürgerliche Ordnung bleibt bestehen. **Klausurrelevanz:** Dies markiert die Geburtsstunde der Weimarer Republik, schafft aber auch eine tiefe, dauerhafte Spaltung der deutschen Arbeiterschaft."
+        consequence: "Du rufst die Republik aus. Die Menschenmenge jubelt frenetisch. Du kommst Karl Liebknecht (der um 16:00 Uhr die sozialistische Räterepublik verkündet) knapp zuvor. Die bürgerliche Ordnung bleibt bestehen. **Geschichtliche Einordnung:** Dies markiert die Geburtsstunde der Weimarer Republik, schafft aber auch eine tiefe, dauerhafte Spaltung der deutschen Arbeiterschaft."
       },
       {
         title: "Nationalversammlung abwarten",
@@ -922,6 +1117,27 @@ const decisionScenarios = [
         historical: false,
         header: "⚠️ Alternatives Räte-Szenario",
         consequence: "Du wartest ab. Karl Liebknecht ruft ungehindert um 16:00 Uhr die Räterepublik aus. Berlin gerät in einen bürgerkriegsähnlichen Zustand. Es bildet sich ein radikales Rätesystem nach Vorbild der Bolschewiki. Die bürgerliche Demokratie scheitert schon vor ihrer Geburt, Deutschland driftet nach links."
+      }
+    ]
+  },
+  {
+    year: "1918 (10. Nov.)",
+    role: "Friedrich Ebert (Rat der Volksbeauftragten)",
+    desc: "10. November 1918. Der Kaiser ist abgedankt, die Republik ausgerufen. Doch die Lage ist extrem instabil: Radikale linke Gruppen fordern eine Räterepublik nach sowjetischem Vorbild. General Wilhelm Groener von der Obersten Heeresleitung bietet dir am Telefon ein geheimes Bündnis an: Die Armee garantiert der neuen Regierung Loyalität und militärischen Schutz vor Aufständen, wenn du im Gegenzug die bestehende Offiziershierarchie unangetastet lässt und ein Rätesystem verhinderst. Gehst du diesen folgenschweren Pakt ein?",
+    options: [
+      {
+        title: "Bündnis mit dem Militär schließen",
+        text: "Du nimmst das Angebot der OHL an, um die öffentliche Ordnung zu sichern und eine radikale Revolution abzuwehren.",
+        historical: true,
+        header: "🤝 Der Ebert-Groener-Pakt (Pakt mit den alten Eliten)",
+        consequence: "Du gehst das Bündnis ein. Mit Hilfe des Militärs und rechter Freikorps werden linke Aufstände (wie der Spartakusaufstand) blutig niedergeschlagen. Die Ordnung ist gesichert und der Weg zur Weimarer Verfassung frei. **Geschichtliche Einordnung:** Dieser Pakt sicherte das Überleben der Republik, schuf jedoch eine schwere Hypothek: Die alten, republikfeindlichen Militäreliten behielten ihre Macht und die deutsche Arbeiterschaft spaltete sich unüberbrückbar."
+      },
+      {
+        title: "Pakt ablehnen & Allianz mit Rätegruppen suchen",
+        text: "Du lehnst das Bündnis ab und stützt dich stattdessen auf die revolutionäre Arbeiter- und Soldatenräte zur Demokratisierung von Wirtschaft und Militär.",
+        historical: false,
+        header: "⚠️ Alternatives Räterepublik-Szenario",
+        consequence: "Du verweigerst den Pakt mit der Generalität. Ohne militärischen Schutz bricht die staatliche Ordnung weiter zusammen. Die Rätegruppen drängen auf eine grundlegende Entmachtung der kaiserlichen Eliten. Es droht ein offener Bürgerkrieg mit unvorhersehbarem Ausgang – Deutschland steht am Rande einer sozialistischen Räterepublik, ähnlich der sowjetischen Entwicklung."
       }
     ]
   },
@@ -935,10 +1151,10 @@ const decisionScenarios = [
         text: "Du brichst den ruinösen Ruhrstreik sofort ab und führst die durch Grundbesitz gedeckte Rentenmark ein.",
         historical: true,
         header: "🪙 Das Überlebenswunder (Rentenmark)",
-        consequence: "Du beendest den Ruhrkampf, was dich zur Zielscheibe rechter Hetze macht, aber die Staatsfinanzen rettet. Die neue Rentenmark stoppt die Inflation im November schlagartig. Du meisterst das Krisenjahr 1923 und leitest die 'Goldenen Zwanziger' ein. **Klausurrelevanz:** Stresemanns Währungsstabilisierung rettete kurzfristig die Demokratie, doch die Traumata des Vermögensverlustes trieben den bürgerlichen Mittelstand später in die Arme der NSDAP."
+        consequence: "Du beendest den Ruhrkampf, was dich zur Zielscheibe rechter Hetze macht, aber die Staatsfinanzen rettet. Die neue Rentenmark stoppt die Inflation im November schlagartig. Du meisterst das Krisenjahr 1923 und leitest die 'Goldenen Zwanziger' ein. **Geschichtliche Einordnung:** Stresemanns Währungsstabilisierung rettete kurzfristig die Demokratie, doch die Traumata des Vermögensverlustes trieben den bürgerlichen Mittelstand später in die Arme der NSDAP."
       },
       {
-        title: "Generalstreik fortsetzen &Boykott verschärfen",
+        title: "Generalstreik fortsetzen & Boykott verschärfen",
         text: "Du hältst den passiven Widerstand aufrecht. Das Geld wird im astronomischen Tempo weitergedruckt, um den Kampf zu gewinnen.",
         historical: false,
         header: "⚠️ Alternatives Hyperinflations-Chaos",
@@ -1056,7 +1272,7 @@ function triggerLevelUp() {
       ${gameState.level === 4 ? `
         <div style="background: rgba(212, 175, 55, 0.15); border: 1px solid var(--accent-gold); border-radius: 8px; padding: 1rem; margin-bottom: 2rem;">
           <p style="font-size: 0.95rem; margin-bottom: 0; color: var(--accent-gold); font-weight: 700;">
-            🔓 Sensationell! Du hast das Geheime Staatsarchiv freigeschaltet! Der Klausur-Spickzettel ist nun weiter unten komplett lesbar!
+            🔓 Sensationell! Du hast das Geheime Staatsarchiv freigeschaltet! Der Experten-Spickzettel ist nun weiter unten komplett lesbar!
           </p>
         </div>
       ` : ""}
@@ -1220,8 +1436,7 @@ function initDecisionsSimulator() {
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
       gameState.decisionStep++;
-      if (gameState.decisionStep >= decisionScenarios.length) {
-        gameState.decisionStep = 0; // Loop or finish
+      if (gameState.decisionStep === decisionScenarios.length) {
         unlockTrophy("trophy-resilienz");
       }
       saveGameState();
@@ -1231,8 +1446,6 @@ function initDecisionsSimulator() {
 }
 
 function renderDecisionScene() {
-  const scene = decisionScenarios[gameState.decisionStep];
-  
   const yr = document.getElementById("decisionYear");
   const role = document.getElementById("decisionRole");
   const desc = document.getElementById("decisionDescription");
@@ -1247,6 +1460,49 @@ function renderDecisionScene() {
   optionsContainer.innerHTML = "";
   nextBtn.style.display = "none";
 
+  if (gameState.decisionStep >= decisionScenarios.length) {
+    // Show completion screen!
+    yr.innerText = "FINALE";
+    role.innerText = "Theater-Meister";
+    
+    // Play celebratory sound if available, burst confetti
+    if (typeof ConfettiEngine !== 'undefined' && ConfettiEngine.burst) {
+      ConfettiEngine.burst(150);
+    }
+    if (typeof AudioEngine !== 'undefined' && AudioEngine.playLevelUp) {
+      AudioEngine.playLevelUp();
+    }
+    
+    desc.innerHTML = `
+      <div class="completion-message" style="text-align: center; padding: 1.5rem 0;">
+        <h3 style="color: var(--accent-gold); font-size: 1.6rem; margin-bottom: 1rem; font-family: 'Playfair Display', serif;">🎭 Vorhang fällt!</h3>
+        <p style="font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.5rem;">
+          Du hast alle 6 historischen Entscheidungsszenarien des Schicksalstheaters erfolgreich durchlebt! Von den militarisierten Spannungen der Julikrise 1914 über die Grauen von Verdun 1916 bis hin zu den bürgerkriegsähnlichen Stürmen und der Währungsstabilisierung von 1923.
+        </p>
+        <p style="font-size: 1.05rem; line-height: 1.6; font-weight: bold; color: var(--accent-gold); margin-bottom: 1.5rem;">
+          Deine Entscheidungen haben den Lauf der Geschichte geprägt. Du kannst das Theater jederzeit neu starten, um alternative Pfade zu erkunden und weiterhin XP (+50 XP pro Entscheidung) zu sammeln!
+        </p>
+      </div>
+    `;
+    
+    const restartBtn = document.createElement("button");
+    restartBtn.className = "btn btn-primary pulse-glow";
+    restartBtn.style.marginTop = "1rem";
+    restartBtn.style.display = "inline-flex";
+    restartBtn.style.alignItems = "center";
+    restartBtn.style.gap = "0.5rem";
+    restartBtn.innerHTML = "🎭 Theater neu starten";
+    restartBtn.addEventListener("click", () => {
+      gameState.decisionStep = 0;
+      saveGameState();
+      renderDecisionScene();
+    });
+    optionsContainer.appendChild(restartBtn);
+    return;
+  }
+
+  const scene = decisionScenarios[gameState.decisionStep];
+  
   yr.innerText = scene.year;
   role.innerText = scene.role;
 
@@ -1573,15 +1829,15 @@ function showQuizResults() {
   // Dynamic feedback copy (MrWissen2go style)
   if (percentage >= 85) {
     resTitle.innerText = "🏆 Herausragend! Du bist ein absolutes Geschichts-Genie!";
-    resText.innerText = `Unglaublich! Mit ${gameState.quizScore} von ${gameState.shuffledQuestions.length} Punkten hast du bewiesen, dass du die komplexen Dynamiken von der Julikrise über die blutigen Materialschlachten bis hin zur Währungsstabilisierung 1923 verinnerlicht hast. Wenn du dieses Wissen morgen in deiner Klausur genauso schreibst, steht deiner Bestnote nichts mehr im Weg!`;
+    resText.innerText = `Unglaublich! Mit ${gameState.quizScore} von ${gameState.shuffledQuestions.length} Punkten hast du bewiesen, dass du die komplexen Dynamiken von der Julikrise über die blutigen Materialschlachten bis hin zur Währungsstabilisierung 1923 verinnerlicht hast. Mit diesem profunden Wissen bist du hervorragend aufgestellt, um historische Zusammenhänge differenziert zu analysieren und zu bewerten!`;
     unlockTrophy("trophy-genius");
     ConfettiEngine.burst(150);
   } else if (percentage >= 60) {
     resTitle.innerText = "👍 Starke Leistung! Solides Fundament.";
-    resText.innerText = `Du hast ${gameState.quizScore} von ${gameState.shuffledQuestions.length} Fragen richtig beantwortet. Damit verstehst du die zentralen Wendepunkte der Epoche sehr gut. Schau dir zur vollkommenen Sicherheit morgen vor der Arbeit einfach noch einmal den exklusiven Spickzettel (ab Stufe 4 freigeschaltet) an, um auch die Diskussionsfragen absolut perfekt zu meistern!`;
+    resText.innerText = `Du hast ${gameState.quizScore} von ${gameState.shuffledQuestions.length} Fragen richtig beantwortet. Damit verstehst du die zentralen Wendepunkte der Epoche sehr gut. Schau dir zur Vertiefung einfach noch einmal den exklusiven Spickzettel (ab Stufe 4 freigeschaltet) an, um auch komplexe Fragestellungen absolut souverän zu meistern!`;
   } else {
     resTitle.innerText = "📖 Ein kleiner Trainingslauf...";
-    resText.innerText = `Du hast ${gameState.quizScore} von ${gameState.shuffledQuestions.length} Punkten erzielt. Mach dir überhaupt keine Sorgen, bis morgen hast du noch genügend Zeit! Lies dir am besten die Zeitleiste aufmerksam durch, triff andere Entscheidungen im Schicksalstheater und wiederhole das Quiz einfach noch einmal. Jedes Fragebeantworten festigt dein Wissen. Du schaffst das!`;
+    resText.innerText = `Du hast ${gameState.quizScore} von ${gameState.shuffledQuestions.length} Punkten erzielt. Nutze diese Gelegenheit für einen weiteren Trainingslauf! Lies dir am besten die Zeitleiste aufmerksam durch, triff andere Entscheidungen im Schicksalstheater und wiederhole das Quiz einfach noch einmal. Jedes Beantworten festigt dein Wissen. Bleib dran, du wirst zum Geschichts-Experten!`;
   }
 }
 
@@ -1810,7 +2066,7 @@ function renderTimeline(filter) {
             ${detailsListHTML}
           </ul>
           <div class="timeline-exam-tip">
-            <strong>💡 Klausur-Tipp für die Arbeit:</strong> ${formatText(ev.tip)}
+            <strong>💡 Geschichts-Analyse-Tipp:</strong> ${formatText(ev.tip)}
           </div>
         </div>
       </div>
@@ -1881,7 +2137,7 @@ function renderFlashcards() {
   });
 }
 
-// 6. Klausur-Trainer Tabs switching
+// 6. Geschichts-Trainer Tabs switching
 function initTrainerTabs() {
   const tabs = document.querySelectorAll(".trainer-tab-btn");
   const panes = document.querySelectorAll(".trainer-content-pane");
@@ -1959,7 +2215,7 @@ const crashkursData = [
       "Sarajevo war der Auslöser, nicht die tiefere Ursache.",
       "Der Blankoscheck gave Österreich freie Hand für ein hartes Ultimatum."
     ],
-    gold: "Für die Klausur: Trenne immer Auslöser (Sarajevo) von den wahren Kriegsursachen (Imperialismus, Bündnisse)."
+    gold: "Zur historischen Einordnung: Trenne immer den Anlass (Sarajevo) von den strukturellen Kriegsursachen (Imperialismus, Bündnisse)."
   },
   {
     title: "2. Die Hölle der Materialschlacht (1914-1918)",
@@ -1969,7 +2225,7 @@ const crashkursData = [
       "Hunderttausende Tote bei Verdun durch industrielle Massenvernichtung.",
       "Totale Mobilisierung von Zivilbevölkerung und Wirtschaft."
     ],
-    gold: "Für die Klausur: Der 'Totale Krieg' hob die Grenze zwischen Front und friedlicher Heimatfront fast völlig auf."
+    gold: "Zur historischen Einordnung: Der 'Totale Krieg' hob die Grenze zwischen kämpfender Front und ziviler Heimatfront fast völlig auf."
   },
   {
     title: "3. Das Epochenjahr 1917",
@@ -1979,7 +2235,7 @@ const crashkursData = [
       "Zusammenbruch der Ostfront nach Russlands sozialistischer Revolution.",
       "Die USA und Sowjetrussland betreten als neue Mächte die Weltbühne."
     ],
-    gold: "Für die Klausur: Das Jahr 1917 markiert das Ende des europäisch dominierten Zeitalters."
+    gold: "Zur historischen Einordnung: Das Jahr 1917 markiert als Zäsur das Ende des rein europäisch dominierten Zeitalters."
   },
   {
     title: "4. Sturz des Kaisers & Neue Republik (1918-1919)",
@@ -1989,7 +2245,7 @@ const crashkursData = [
       "Doppelte Ausrufung der Republik: Demokratisch vs. Sozialistisch.",
       "Kriegsschuldparagraph 231 belastete die junge Demokratie schwer."
     ],
-    gold: "Für die Klausur: Die Dolchstoßlegende behauptete fälschlicherweise, die Heimat habe dem unbesiegten Heer den Dolch in den Rücken gestoßen."
+    gold: "Zur historischen Einordnung: Die Dolchstoßlegende war eine manipulative Verschwörungserzählung, die der Weimarer Demokratie von Beginn an die Legitimität entziehen sollte."
   },
   {
     title: "5. Das Krisenjahr 1923",
@@ -1999,7 +2255,7 @@ const crashkursData = [
       "Hyperinflation enteignete den bürgerlichen Mittelstand.",
       "Hass auf das System trieb Wähler an die extremen Ränder (KPD/NSDAP)."
     ],
-    gold: "Für die Klausur: Erst die Währungsreform (Rentenmark) unter Stresemann beendete das Chaos."
+    gold: "Zur historischen Einordnung: Erst die Währungsreform (Rentenmark) unter Stresemann beendete das inflationäre Chaos und stabilisierte die Republik."
   }
 ];
 
@@ -2123,7 +2379,7 @@ function renderCrashkursStep() {
             ${step.points.map(p => `<li>${formatText(p)}</li>`).join("")}
           </ul>
           <div class="crashkurs-gold-box">
-            <h5>💡 KLAUSUR-GOLD</h5>
+            <h5>💡 GESCHICHTS-GOLD</h5>
             <p>${formatText(step.gold)}</p>
           </div>
         `;
