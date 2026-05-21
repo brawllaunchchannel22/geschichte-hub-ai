@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geschichts-Simulator | Erster Weltkrieg bis 1923</title>
+  <meta name="description" content="Tauche ein in das interaktive Geschichts-Erlebnis von 1914 bis 1923. Meistere deine Geschichtsklausur mit Zeitleisten, Entscheidungssimulationen, Trophäen und Sound-Synthese.">
+  
+  <!-- MANDATORY FOUC Prevention Script for Dark Mode Theme Setting -->
+  <meta name="color-scheme" content="light dark">
+  <script>
+    {
+      const colorScheme = localStorage.getItem("color-scheme");
+      if (colorScheme) {
+        document.documentElement.setAttribute('data-theme', colorScheme);
+      } else {
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Fullscreen Canvas for Celebratory Level-Up Confetti Animations -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Dynamic Scroll Progress Indicator -->
+  <div style="position: fixed; top: 0; left: 0; right: 0; height: 3px; background: rgba(var(--border-rgb), 0.05); z-index: 1100;">
+    <div id="scrollProgress" style="height: 100%; width: 0%; background: var(--accent-gold); transition: width 0.1s ease-out;"></div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header id="mainHeader">
+    <div class="container header-container">
+      <a href="#" class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-gold);"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        <span>Geschichts</span>Spiel
+      </a>
+      <nav id="navMenu">
+        <a href="#timeline" class="nav-link active">Zeitleiste</a>
+        <a href="#decisions" class="nav-link">Entscheidungen</a>
+        <a href="#trainer" class="nav-link">Klausur-Trainer</a>
+        <a href="#flashcards" class="nav-link">Lernkarten</a>
+        <a href="#quiz" class="nav-link">Simulator</a>
+      </nav>
+      <div class="header-controls">
+        <!-- Focused Study Ambient Sound button -->
+        <button class="audio-focus-btn" id="audioFocusBtn" aria-label="Konzentrations-Audio (Regen-Rauschen) einschalten">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M12 3a9 9 0 0 1 9 9c0 2.376-1.07 4.195-2.506 5.34a.75.75 0 1 1-.944-1.166C18.665 15.295 19.5 13.9 19.5 12a7.5 7.5 0 0 0-15 0c0 1.9.835 3.295 1.95 4.174a.75.75 0 1 1-.944 1.166C4.07 16.195 3 14.376 3 12a9 9 0 0 1 9-9zm0 6a3 3 0 0 1 3 3c0 .884-.318 1.488-.753 1.836a.75.75 0 1 1-.944-1.166c.145-.11.197-.245.197-.67a1.5 1.5 0 0 0-3 0c0 .425.052.56.197.67a.75.75 0 1 1-.944 1.166C10.318 13.488 10 12.884 10 12a3 3 0 0 1 3-3zm-1 7.5a1 1 0 1 1 2 0 1 1 0 0 1-2 0z"/>
+          </svg>
+          Focus Audio
+        </button>
+
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Farbschema umschalten">
+          <svg xmlns="http://www.w3.org/2000/svg" id="themeIcon" viewBox="0 0 24 24">
+            <path d="M12 3c.132 0 .263 0 .393.007a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 3z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="sparkles" id="sparklesContainer">
+      <span class="spark"></span>
+      <span class="spark"></span>
+      <span class="spark"></span>
+      <span class="spark"></span>
+      <span class="spark"></span>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content container">
+      <span class="hero-tagline">Klausur-Vorbereitungsspiel (22. Mai 2026)</span>
+      <h1>Erster Weltkrieg bis 1923</h1>
+      <p>Entfliehe TikTok und werde zum Akteur der Geschichte. Triff historische Weichenstellungen, absolviere den Anforderungsbereich-Trainer und schalte kostbare Trophäen frei!</p>
+      <div class="cta-group">
+        <button class="btn btn-primary" id="startCrashkursBtn" style="background: linear-gradient(135deg, var(--accent-gold) 0%, #ff8c00 100%); color: #000; border: none; font-weight: 700; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);">
+          ⚡ MrWissen2go Express-Crashkurs
+        </button>
+        <a href="#decisions" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          Entscheidungstheater spielen
+        </a>
+        <a href="#timeline" class="btn btn-secondary">Timeline</a>
+        <a href="#trainer" class="btn btn-secondary">Klausur-Trainer</a>
+        <a href="#quiz" class="btn btn-secondary">Quiz-Simulator</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. Timeline Section -->
+  <section id="timeline">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Chronologie</span>
+        <h2>Der Weg in die Katastrophe & Krise</h2>
+        <p>Erforsche die wichtigsten historischen Meilensteine von 1914 bis 1923. Jede Karte bringt dir beim Anklicken wertvolle Erfahrungspunkte (XP) und Geheim-Tipps für die Klausur!</p>
+      </div>
+
+      <!-- Filters -->
+      <div class="timeline-filters">
+        <button class="filter-btn active" data-filter="all">Alle Ereignisse</button>
+        <button class="filter-btn" data-filter="militarisch">Militärischer Verlauf</button>
+        <button class="filter-btn" data-filter="politisch">Politik & Diplomatie</button>
+        <button class="filter-btn" data-filter="heimatfront">Heimatfront & Gesellschaft</button>
+      </div>
+
+      <!-- Timeline Core -->
+      <div class="timeline-container" id="timelineContainer">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. New: Decision Theatre Section (Schicksalstheater) -->
+  <section id="decisions" style="background: rgba(var(--card-bg-rgb), 0.15);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Rollenspiel-Simulator</span>
+        <h2>Schicksalstheater (1914–1923)</h2>
+        <p>Versetze dich in die Rollen historischer Staatslenker, Generäle und Arbeiterführer. Welche Weichen stellst du in den Jahren der Krise? Jede getroffene Wahl bringt dir +50 XP!</p>
+      </div>
+
+      <div class="decision-widget">
+        <div class="decision-scene-card glass-card" id="decisionSceneCard">
+          <div class="decision-meta">
+            <span class="decision-year" id="decisionYear">1914</span>
+            <span class="decision-role" id="decisionRole">Reichskanzler</span>
+          </div>
+          
+          <!-- Dramatic typewriter text -->
+          <div class="decision-description" id="decisionDescription">
+            Lade Szenario...
+          </div>
+
+          <!-- Dynamic decisions options -->
+          <div class="decision-options-container" id="decisionOptionsContainer">
+            <!-- Rendered dynamically by JavaScript -->
+          </div>
+
+          <!-- Consequence display -->
+          <div class="consequence-card" id="consequenceCard">
+            <div class="consequence-header" id="consequenceHeader">
+              🔍 Historische Einordnung
+            </div>
+            <p id="consequenceText">Auswirkungstext...</p>
+            <button class="btn btn-primary" id="decisionNextBtn">Nächstes Szenario</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Klausur-Trainer Section -->
+  <section id="trainer">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Klausur-Methoden</span>
+        <h2>Der Anforderungsbereich-Trainer</h2>
+        <p>Hier lernst du die Methodik für deine drei Aufgaben: Zusammenfassen, Diskutieren und Bewerten. Formuliere eigene Antworten, lerne Formulierhilfen und sacke XP ein!</p>
+      </div>
+
+      <div class="trainer-container">
+        <!-- Vertical Tabs -->
+        <div class="trainer-tabs">
+          <button class="trainer-tab-btn active" data-tab="afb1">
+            <span class="tab-afb">Anforderungsbereich I</span>
+            <span class="tab-title">Zusammenfassen</span>
+          </button>
+          <button class="trainer-tab-btn" data-tab="afb2">
+            <span class="tab-afb">Anforderungsbereich II</span>
+            <span class="tab-title">Diskutieren</span>
+          </button>
+          <button class="trainer-tab-btn" data-tab="afb3">
+            <span class="tab-afb">Anforderungsbereich III</span>
+            <span class="tab-title">Bewerten</span>
+          </button>
+        </div>
+
+        <!-- Content Panes -->
+        <div class="trainer-content">
+          <!-- AFB 1 -->
+          <div class="trainer-content-pane active glass-card" id="pane-afb1">
+            <div class="pane-intro">
+              <h3>AFB I: Zusammenfassen & Beschreiben</h3>
+              <p>Hier geht es um die reine Wiedergabe von Fakten und Strukturierung von historischem Wissen. Es ist die Basis deiner Klausur.</p>
+            </div>
+            
+            <div class="methoden-box">
+              <h4>Das musst du in der Arbeit beachten:</h4>
+              <ul>
+                <li><strong>Sachlich bleiben:</strong> Schreibe im Präsens und verzichte vollständig auf eine eigene Meinung.</li>
+                <li><strong>Strukturieren:</strong> Ordne die Ereignisse chronologisch oder thematisch (z.B. Ursachen, Anlass, Ausbruch, Verlauf).</li>
+                <li><strong>Fachbegriffe nutzen:</strong> Verwende gezielt historische Begriffe (z.B. <em>Militarismus</em>, <em>Bündnispolitik</em>, <em>Stellungskrieg</em>, <em>Schlieffen-Plan</em>).</li>
+              </ul>
+            </div>
+
+            <!-- Interactive Practice -->
+            <div class="sandbox-card">
+              <h4>✍️ Interaktive Schreib-Übung (+30 XP)</h4>
+              <p><strong>Aufgabe:</strong> Fasse die strukturellen Ursachen zusammen, die zum Ausbruch des Ersten Weltkriegs führten.</p>
+              <textarea class="sandbox-textarea" id="textarea-afb1" placeholder="Schreibe hier deinen Antwortentwurf (z.B. Imperialismus, Bündnissysteme, Militarismus...)"></textarea>
+              <div class="sandbox-actions">
+                <div class="formulierungs-hilfe">
+                  <select class="dropdown-select" id="select-afb1" aria-label="Formulierungshilfen für AFB I">
+                    <option value="" disabled selected>Formulierungshilfen...</option>
+                    <option value="Als wesentliche strukturelle Ursachen für den Ausbruch des Ersten Weltkriegs lassen sich...">Als wesentliche strukturelle Ursachen...</option>
+                    <option value="Ein entscheidender Faktor im Vorfeld des Krieges war die zunehmende Rivalität der europäischen Großmächte im Zeitalter des...">Ein entscheidender Faktor im Vorfeld...</option>
+                    <option value="Zusammenfassend lässt sich konstatieren, dass die Julikrise 1914 auf ein bereits hochgradig militarisiertes Umfeld traf, welches...">Zusammenfassend lässt sich konstatieren...</option>
+                  </select>
+                </div>
+                <button class="sandbox-compare-btn" data-target="afb1">Mit Musterlösung vergleichen</button>
+              </div>
+              <div class="sandbox-feedback" id="feedback-afb1">
+                <h5>🏆 Perfekt formulierter Musteraufsatz:</h5>
+                <div class="musterantwort-text" id="muster-afb1">
+                  Als wesentliche strukturelle Ursachen für den Ausbruch des Ersten Weltkriegs lassen sich vier Dimensionen anführen:
+                   Erstens der <strong>Imperialismus</strong>, also das aggressive Streben der europäischen Großmächte nach Kolonien und weltweitem Einfluss, was zu permanenten diplomatischen Krisen führte (z. B. Marokkokrisen). 
+                   Zweitens die <strong>Bündnispolitik</strong>, die zu einer starren Blockbildung (Mittelmächte vs. Triple Entente) führte und aus einem lokalen Konflikt einen Weltkrieg machen konnte.
+                   Drittens das extreme <strong>Wettrüsten</strong>, insbesondere das deutsch-britische Flottenwettrüsten, was das gegenseitige Misstrauen anheizte.
+                   Viertens ein allgegenwärtiger <strong>Militarismus</strong> und <strong>Nationalismus</strong> in den Gesellschaften, der die Kriegsbereitschaft erhöhte.
+                   Der Anschlag von Sarajevo am 28. Juni 1914 fungierte in diesem Pulverfass schließlich als Anlass (Funke), der die Julikrise auslöste.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AFB 2 -->
+          <div class="trainer-content-pane glass-card" id="pane-afb2">
+            <div class="pane-intro">
+              <h3>AFB II: Diskutieren & Analysieren</h3>
+              <p>Im zweiten Bereich musst du historische Thesen analysieren, Argumente abwägen und gegeneinander stellen. Hier wird nach dem "Warum" und "Wie" gefragt.</p>
+            </div>
+            
+            <div class="methoden-box">
+              <h4>Das musst du in der Arbeit beachten:</h4>
+              <ul>
+                <li><strong>Mehrperspektivität:</strong> Betrachte das Thema immer aus mindestens zwei Blickwinkeln (z.B. Sicht der Alliierten vs. deutsche Sicht beim Versailler Vertrag).</li>
+                <li><strong>Theorie-Einbindung:</strong> Beziehe dich auf bekannte Historiker-Thesen (z.B. die *Kriegsschuldfrage*: Fritz Fischer vs. Christopher Clark).</li>
+                <li><strong>Logische Verknüpfung:</strong> Verwende starke Kontrast- und Argumentationsverknüpfungen (z.B. <em>einerseits/andererseits</em>, <em>demgegenüber steht</em>, <em>dies wird gestützt durch</em>).</li>
+              </ul>
+            </div>
+
+            <!-- Interactive Practice -->
+            <div class="sandbox-card">
+              <h4>✍️ Interaktive Schreib-Übung (+30 XP)</h4>
+              <p><strong>Aufgabe:</strong> Diskutiere, ob Deutschland die alleinige Schuld am Ausbruch des Ersten Weltkriegs trägt (Bezug zum Versailler Vertrag Art. 231 vs. Clark's "Schlafwandler").</p>
+              <textarea class="sandbox-textarea" id="textarea-afb2" placeholder="Formuliere hier deine Pro- und Contra-Argumente..."></textarea>
+              <div class="sandbox-actions">
+                <div class="formulierungs-hilfe">
+                  <select class="dropdown-select" id="select-afb2" aria-label="Formulierungshilfen für AFB II">
+                    <option value="" disabled selected>Formulierungshilfen...</option>
+                    <option value="Die Frage nach der Kriegsschuld ist in der Geschichtswissenschaft hochgradig umstritten. Während Artikel 231 des Versailler Vertrags festlegte, dass...">Die Frage nach der Kriegsschuld...</option>
+                    <option value="Einerseits spricht für eine Hauptverantwortung des Deutschen Reiches die Ausstellung des sogenannten 'Blankoschecks' an Österreich-Ungarn, da...">Einerseits spricht für eine Hauptverantwortung...</option>
+                    <option value="Andererseits stützt die moderne Forschung, insbesondere Christopher Clarks These der 'Schlafwandler', die Ansicht, dass...">Andererseits stützt die moderne Forschung...</option>
+                  </select>
+                </div>
+                <button class="sandbox-compare-btn" data-target="afb2">Mit Musterlösung vergleichen</button>
+              </div>
+              <div class="sandbox-feedback" id="feedback-afb2">
+                <h5>🏆 Perfekt formulierter Musteraufsatz:</h5>
+                <div class="musterantwort-text" id="muster-afb2">
+                  Die Frage nach der Kriegsschuld (Kriegsschuldfrage) ist in der Geschichtswissenschaft seit über einem Jahrhundert umstritten. 
+                   <strong>Einerseits</strong> spricht eine erhebliche historische Evidenz für eine Hauptverantwortung des Deutschen Reiches. Mit dem <strong>Blankoscheck</strong> vom 5. Juli 1914 trieb Berlin Österreich-Ungarn zu einem aggressiven Vorgehen gegen Serbien und nahm einen europäischen Krieg bewusst in Kauf (Fritz-Fischer-These). Auch der Schlieffen-Plan und der völkerrechtswidrige Einmarsch in Belgien belegen die hohe deutsche Aggressivität.
+                   <strong>Andererseits</strong> stützt die moderne Forschung, insbesondere Christopher Clarks Standardwerk <em>"Die Schlafwandler"</em>, ein differenzierteres Bild. Clark argumentiert, dass alle europäischen Großmächte durch diplomatische Misskalkulationen, ein starres Bündnissystem und übersteigertes Misstrauen gemeinschaftlich in den Krieg hineingeschlittert seien. Keine Macht habe die Krise deeskalieren wollen.
+                   <strong>Fazit:</strong> Eine alleinige Schuld Deutschlands (wie in Artikel 231 des Versailler Vertrags postuliert) ist historisch nicht haltbar. Dennoch trug die deutsche Führung durch die bedingungslose Unterstützung Wiens und den Schlieffen-Plan eine ganz erhebliche Mitverantwortung für die Eskalation der Julikrise.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AFB 3 -->
+          <div class="trainer-content-pane glass-card" id="pane-afb3">
+            <div class="pane-intro">
+              <h3>AFB III: Bewerten & Beurteilen</h3>
+              <p>Im höchsten Anforderungsbereich triffst du ein begründetes Sach- und Werturteil aus heutiger oder damaliger Perspektive. Hier zeigst du echtes historisches Denken.</p>
+            </div>
+            
+            <div class="methoden-box">
+              <h4>Das musst du in der Arbeit beachten:</h4>
+              <ul>
+                <li><strong>Sachurteil vs. Werturteil:</strong> Unterscheide, wie ein Ereignis damals wirkte (Sachurteil, z.B. Wahrnehmung des Versailler Vertrags als unerträglicher "Diktatfrieden") und wie wir es heute moralisch/demokratisch einschätzen (Werturteil, z.B. Bewertung des Vertrags als Belastung für die Weimarer Demokratie).</li>
+                <li><strong>Kriterien festlegen:</strong> Begründe dein Urteil anhand klarer Kriterien (z.B. Stabilität, Menschenrechte, langfristige Folgen).</li>
+                <li><strong>Fach-Fazit:</strong> Beende deine Argumentation mit einem klaren Schlusssatz, der deine Wertung auf den Punkt bringt (z.B. <em>Aus heutiger Perspektive erweist sich...</em>).</li>
+              </ul>
+            </div>
+
+            <!-- Interactive Practice -->
+            <div class="sandbox-card">
+              <h4>✍️ Interaktive Schreib-Übung (+30 XP)</h4>
+              <p><strong>Aufgabe:</strong> Nimm Stellung zur These, ob das Krisenjahr 1923 als das "Überlebenswunder" oder als der "Sargnagel" der Weimarer Republik zu bewerten ist.</p>
+              <textarea class="sandbox-textarea" id="textarea-afb3" placeholder="Formuliere hier deine historische Bewertung..."></textarea>
+              <div class="sandbox-actions">
+                <div class="formulierungs-hilfe">
+                  <select class="dropdown-select" id="select-afb3" aria-label="Formulierungshilfen für AFB III">
+                    <option value="" disabled selected>Formulierungshilfen...</option>
+                    <option value="Bei der Beurteilung des Krisenjahres 1923 muss zwischen kurzfristiger Bewältigung und langfristigen Hypotheken differenziert werden...">Bei der Beurteilung des Krisenjahres 1923...</option>
+                    <option value="Aus zeitgenössischer Perspektive wirkte das Jahr 1923 mit Ruhrbesetzung, Hyperinflation und Putschversuchen existenzbedrohend, da...">Aus zeitgenössischer Perspektive...</option>
+                    <option value="Aus heutiger historischer Sicht lässt sich das Jahr 1923 als eine Zäsur bewerten, die zwar die Resilienz der Verfassung bewies, aber...">Aus heutiger historischer Sicht...</option>
+                  </select>
+                </div>
+                <button class="sandbox-compare-btn" data-target="afb3">Mit Musterlösung vergleichen</button>
+              </div>
+              <div class="sandbox-feedback" id="feedback-afb3">
+                <h5>🏆 Perfekt formulierter Musteraufsatz:</h5>
+                <div class="musterantwort-text" id="muster-afb3">
+                  Bei der Beurteilung des Krisenjahres 1923 muss zwischen der kurzfristigen Bewältigung und den langfristigen Hypotheken differenziert werden.
+                   <strong>Im Sachurteil (zeitgenössisch)</strong> erlebte die Republik eine katastrophale Belastungsprobe. Die <strong>Ruhrbesetzung</strong>, die <strong>Hyperinflation</strong>, die sozialistische Unruhe in Sachsen sowie der <strong>Hitler-Putsch</strong> schufen ein Klima der extremen Instabilität. Dass die Republik dies überstand (durch Gustav Stresemanns kluge Außenpolitik, das Ende des passiven Widerstands und die Währungsreform zur <strong>Rentenmark</strong>), gleicht einem "Überlebenswunder" und beweist die damalige Handlungsfähigkeit der demokratischen Kräfte.
+                   <strong>Im Werturteil (aus heutiger historischer Sicht)</strong> erweist sich 1923 jedoch als tiefe Hypothek. Die Inflation enteignete die bürgerliche Mittelschicht wirtschaftlich und entfremdete sie dauerhaft vom demokratischen Staat. Zudem zeigte die milde Justiz gegenüber Adolf Hitler ("auf dem rechten Auge blind"), dass die Justiz und die Reichswehr die Republik nur halbherzig stützten.
+                   <strong>Fazit:</strong> 1923 war kurzfristig ein triumphales Überlebenswunder der Weimarer Demokratie, bildete jedoch langfristig den psychologischen Nährboden und damit einen schleichenden Sargnagel für deren späteren Untergang.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Flashcards Section -->
+  <section id="flashcards" style="background: rgba(var(--card-bg-rgb), 0.25);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Begriffs-Trainer</span>
+        <h2>Wichtige Fachbegriffe auswendig lernen</h2>
+        <p>Ein unverzichtbares Werkzeug für Spitzennoten ist die exakte Verwendung historischer Fachbegriffe. Drehe die Karten um (+10 XP pro Karte) und lerne die Definitionen auswendig.</p>
+      </div>
+
+      <div class="cards-grid" id="flashcardsContainer">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Trophies Cabinet (Achievements) -->
+  <section class="trophies-section" id="trophies">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Trophäenschrank</span>
+        <h2>Deine freigeschalteten Meilensteine</h2>
+        <p>Sammle XP durch das Benutzen der Timeline, das Treffen historischer Entscheidungen und Quiz-Erfolge, um diese Trophäen freizuschalten. Schöpfst du dein ganzes Potenzial aus?</p>
+      </div>
+
+      <div class="trophy-grid" id="trophyCabinet">
+        <div class="trophy-card glass-card" id="trophy-julikrise">
+          <div class="trophy-icon">📜</div>
+          <h4 class="trophy-title">Krisen-Diplomat</h4>
+          <p class="trophy-desc">Treffe die erste Entscheidung in der Julikrise 1914.</p>
+        </div>
+        <div class="trophy-card glass-card" id="trophy-resilienz">
+          <div class="trophy-icon">🛡️</div>
+          <h4 class="trophy-title">Verfassungshüter</h4>
+          <p class="trophy-desc">Löse alle vier historischen Entscheidungsszenarien.</p>
+        </div>
+        <div class="trophy-card glass-card" id="trophy-genius">
+          <div class="trophy-icon">👑</div>
+          <h4 class="trophy-title">Geschichts-Genie</h4>
+          <p class="trophy-desc">Erreiche die volle Punktzahl im Quiz-Simulator.</p>
+        </div>
+        <div class="trophy-card glass-card" id="trophy-writer">
+          <div class="trophy-icon">✍️</div>
+          <h4 class="trophy-title">Historischer Analytiker</h4>
+          <p class="trophy-desc">Nutze den Klausurtrainer und vergleiche eine Antwort.</p>
+        </div>
+        <div class="trophy-card glass-card" id="trophy-flashcards">
+          <div class="trophy-icon">💡</div>
+          <h4 class="trophy-title">Begriffskönig</h4>
+          <p class="trophy-desc">Präge dir alle wichtigen Fachbegriffe auf den Karteikarten ein.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Quiz Simulator Section -->
+  <section id="quiz">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Wissens-Check</span>
+        <h2>Klausur-Simulator</h2>
+        <p>Bist du bereit für den Freitag? Teste dein Wissen mit 15 typischen Prüfungsfragen zum Ersten Weltkrieg und der Weimarer Republik. Jede Frage enthält eine sofortige, ausführliche historische Erklärung!</p>
+      </div>
+
+      <div class="quiz-widget glass-card">
+        <!-- Progress bar -->
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="quizProgressFill"></div>
+        </div>
+
+        <!-- Blitz-Modus Controls and Streak (TikTok Proof) -->
+        <div class="quiz-controls-row">
+          <label class="blitz-toggle-label">
+            <input type="checkbox" id="blitzToggle" class="blitz-checkbox">
+            <span class="blitz-toggle-custom"></span>
+            <span class="blitz-label-text">⚡ Blitz-Modus (+50% XP & Zeitdruck)</span>
+          </label>
+          <span class="quiz-streak-badge" id="quizStreakBadge" style="display: none;">
+            🔥 Streak: <strong id="streakCount">0</strong> <span class="streak-multiplier" id="streakMult">(1.0x XP)</span>
+          </span>
+        </div>
+
+        <!-- Timer Bar (visible only in Blitz-Modus) -->
+        <div class="quiz-timer-bar" id="quizTimerBar" style="display: none;">
+          <div class="quiz-timer-fill" id="quizTimerFill"></div>
+        </div>
+
+        <div id="quizPlayScreen">
+          <div class="quiz-header">
+            <span class="quiz-q-num" id="quizQuestionNum">Frage 1 von 15</span>
+            <span class="quiz-score-badge" id="quizScoreBadge">Richtige Antworten: 0</span>
+          </div>
+
+          <h3 class="quiz-question" id="quizQuestionText">Lade Frage...</h3>
+
+          <div class="quiz-options" id="quizOptionsContainer">
+            <!-- Rendered dynamically by JavaScript -->
+          </div>
+
+          <!-- Explanation box -->
+          <div class="quiz-explanation" id="quizExplanationBox">
+            <h4 id="quizExplanationTitle">Historischer Hintergrund:</h4>
+            <p id="quizExplanationText">Erklärungstext...</p>
+          </div>
+
+          <div class="quiz-footer">
+            <button class="btn btn-primary quiz-next-btn" id="quizNextBtn">Nächste Frage</button>
+          </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div class="quiz-results" id="quizResultsScreen">
+          <div class="results-score-circle">
+            <span class="number" id="resultsScoreNumber">0/15</span>
+            <span class="label">Punkte</span>
+          </div>
+          <h3 id="resultsTitle">Gute Arbeit!</h3>
+          <p id="resultsText">Ergebnistext...</p>
+          <button class="btn btn-primary" id="quizRestartBtn">Simulator neu starten</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Premium Klausur-Spickzettel Section (Locked/Unlocked - MrWissen2go style) -->
+  <section id="spickzettel">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Exklusiver Spickzettel</span>
+        <h2>MrWissen2go-Klausurgold</h2>
+        <p>Ein extrem kompakter, vollgepackter Lernzettel zu allen Themen von 1914 bis 1923. Perfekt formuliert für deine Klausur am Freitag. Schalte dieses Herrschaftswissen frei!</p>
+      </div>
+
+      <!-- Spickzettel LOCKED Container -->
+      <div class="spickzettel-locked-card glass-card text-center" id="spickzettelLocked">
+        <div class="lock-icon-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-gold);"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+        <h3>Spickzettel gesperrt (Geheimes Staatsarchiv)</h3>
+        <p>Dieses exklusive Klausur-Wissen ist unter Verschluss. Erreiche **Erfahrungsstufe 4 (Staatsrat / Historiker)**, um das Siegel zu brechen und die ultimativen Zusammenfassungen freizuschalten!</p>
+        <div class="lock-bar-outer">
+          <div class="lock-bar-inner" id="spickzettelUnlockProgress" style="width: 0%;"></div>
+        </div>
+        <span class="lock-status-text" id="spickzettelUnlockText">Benötigt: Level 4 (800 XP) | Aktuell: Level 1 (0 XP)</span>
+        <button id="cheatUnlockSpickzettelBtn" class="btn btn-secondary" style="margin-top: 1.5rem; font-size: 0.8rem; padding: 0.5rem 1.2rem; border-color: rgba(var(--border-rgb), 0.15); border-style: dashed;">
+          ⚡ Keine Zeit? Sofort freischalten für morgen
+        </button>
+      </div>
+
+      <!-- Spickzettel UNLOCKED Container -->
+      <div class="spickzettel-unlocked-container" id="spickzettelUnlocked" style="display: none;">
+        <div class="spickzettel-parchment-sheet">
+          <div class="parchment-header">
+            <h3>📜 GEHEIMES STAATSARCHIV: KLAUSUR-SPICKZETTEL (1914-1923)</h3>
+            <span class="parchment-tag">Freigeschaltet • Stufe 4 Elite</span>
+          </div>
+
+          <div class="parchment-body">
+            <!-- Part 1 -->
+            <div class="spick-block">
+              <h4 class="spick-title">🔥 1. Der Weg in den Ersten Weltkrieg (1914)</h4>
+              <div class="spick-content">
+                <p><strong>Das Kernproblem:</strong> Europa war vor 1914 ein hochexplosives Pulverfass. Warum? Wegen des aggressiven **Imperialismus** (Streben nach Kolonien), des **Militarismus** (Verherrlichung des Soldatenlebens, vor allem im Kaiserreich) und des **Wettrüstens** (besonders das deutsch-britische Flottenwettrüsten). Zwei starre Blöcke standen sich gegenüber: Mittelmächte (Deutschland, Österreich-Ungarn) vs. Triple Entente (Frankreich, Russland, Großbritannien).</p>
+                <div class="klausur-formulierung">
+                  <h5>📝 Klausur-Gold-Formulierung (Ursachen vs. Anlass):</h5>
+                  <blockquote>
+                    "In der Klausur darfst du den <strong>Anlass</strong> – das Attentat von Sarajevo am 28. Juni 1914 – nicht mit den <strong>strukturellen Ursachen</strong> verwechseln. Das Attentat war lediglich der Funke in einem bereits hochgradig militarisierten und durch Bündnisverpflichtungen starren Umfeld. Durch den deutschen <strong>'Blankoscheck'</strong> vom 5. Juli, der Österreich-Ungarn bedingungslose Treue zusicherte, eskalierte die darauffolgende Julikrise zum Weltkrieg."
+                  </blockquote>
+                </div>
+              </div>
+            </div>
+
+            <!-- Part 2 -->
+            <div class="spick-block">
+              <h4 class="spick-title">⚔️ 2. Der „Totale Krieg“ & Das Epochenjahr 1917</h4>
+              <div class="spick-content">
+                <p><strong>Die Industrialisierung des Todes:</strong> Der Krieg an der Westfront erstarrte im <strong>Stellungskrieg</strong> in kilometerlangen Schützengräben. Der Sieg wurde nicht mehr durch militärisches Genie errungen, sondern durch die **Materialschlacht** (Schiere industrielle Produktion von Granaten, Giftgas, Panzern, Flugzeugen).</p>
+                <p><strong>Die Heimatfront:</strong> Der Krieg erfasste die gesamte Zivilbevölkerung. Durch die britische Seeblockade kam es zum katastrophalen <strong>Steckrübenwinter 1916/17</strong>. Hunger und Kälte töteten Hunderttausende Zivilisten. Wichtig: Da die Männer an der Front waren, übernahmen Frauen die Arbeit in Rüstungsfabriken – ein entscheidender Schritt zur Emanzipation und dem späteren Frauenwahlrecht.</p>
+                <div class="klausur-formulierung">
+                  <h5>📝 Klausur-Gold-Formulierung (Das Epochenjahr 1917):</h5>
+                  <blockquote>
+                    "Das Jahr 1917 gilt als <strong>Epochenjahr</strong> und globale Zäsur, da es das Ende des europäisch dominierten Zeitalters einläutete: Der Eintritt der USA aufseiten der Entente brachte die militärische Vorentscheidung, während die russische Oktoberrevolution den Grundstein für die spätere Sowjetunion und den Systemkonflikt des 20. Jahrhunderts legte."
+                  </blockquote>
+                </div>
+              </div>
+            </div>
+
+            <!-- Part 3 -->
+            <div class="spick-block">
+              <h4 class="spick-title">🏛️ 3. Der Sturz des Kaisers & Die Weimarer Geburt (1918-1919)</h4>
+              <div class="spick-content">
+                <p><strong>Die Niederlage:</strong> Im September 1918 wusste die OHL unter Hindenburg und Ludendorff, dass der Krieg verloren war. Um die Verantwortung abzuwälzen, forderten sie überraschend Verhandlungen und eine Parlamentarisierung der Regierung. Als die Marineleitung im Oktober die Flotte in ein sinnlose Todesgefecht schicken wollte, meuterten die Matrosen in Kiel. Dies löste die <strong>Novemberrevolution</strong> aus.</p>
+                <p><strong>9. November 1918:</strong> Das Kaiserreich kollabiert. Kaiser Wilhelm II. dankt ab. Es kommt zur <strong>doppelten Ausrufung der Republik</strong>:</p>
+                <ul>
+                  <li><strong>Philipp Scheidemann (SPD):</strong> Ruft die bürgerlich-parlamentarische Republik aus (setzt sich durch).</li>
+                  <li><strong>Karl Liebknecht (Spartakusbund):</strong> Ruft wenige Stunden später die sozialistische Räterepublik nach russischem Vorbild aus.</li>
+                </ul>
+                <div class="klausur-formulierung">
+                  <h5>📝 Klausur-Gold-Formulierung (Die Dolchstoßlegende & Versailles):</h5>
+                  <blockquote>
+                    "Die OHL schuf im Moment der Niederlage die hochgiftige <strong>Dolchstoßlegende</strong>: Sie behauptete, das Heer sei an der Front 'im Felde unbesiegt' geblieben, aber von Sozialisten und Juden aus der Heimat 'von hinten erdolcht' worden. Dies schwächte die Weimarer Republik von Geburt an. Der <strong>Versailler Vertrag</strong> von 1919 mit dem Kriegsschuldparagraph 231 wurde von fast allen Deutschen als ungerechter <strong>'Diktatfrieden'</strong> wahrgenommen und diente rechtsradikalen Kräften als stärkste propagandistische Waffe."
+                  </blockquote>
+                </div>
+              </div>
+            </div>
+
+            <!-- Part 4 -->
+            <div class="spick-block">
+              <h4 class="spick-title">💣 4. Rechter Terror & Das Schicksalsjahr 1923</h4>
+              <div class="spick-content">
+                <p><strong>Die bedrohte Demokratie:</strong> Die Weimarer Republik war eine <strong>'Demokratie ohne Demokraten'</strong>. Die Eliten (Richter, Generäle, Beamte) stammten aus der Kaiserzeit und verachteten den neuen Staat. Es herrschte blutiger rechter Terror (Kapp-Putsch 1920, systematische Fememorde der Organisation Consul an Walter Rathenau und Matthias Erzberger).</p>
+                <p><strong>Krisenjahr 1923: Das Jahr der Apokalypse:</strong></p>
+                <ol>
+                  <li><strong>Ruhrbesetzung:</strong> Frankreich besetzt das Ruhrgebiet wegen Verzug bei Reparationen. Deutschland antwortet mit <strong>passivem Widerstand</strong> (Generalstreik).</li>
+                  <li><strong>Hyperinflation:</strong> Um den Streik zu finanzieren, druckt der Staat ungeheure Mengen Geld. Die Mark kollabiert. Sparguthaben des bürgerlichen Mittelstandes werden vernichtet. Die Menschen verlieren das Vertrauen in die Wirtschaft.</li>
+                  <li><strong>Hitler-Putsch (9. Nov 1923):</strong> Adolf Hitler versucht in München, die Republik gewaltsam zu stürzen. Der Putsch scheitert kläglich an der Polizei.</li>
+                </ol>
+                <div class="klausur-formulierung">
+                  <h5>📝 Klausur-Gold-Formulierung (Das Überlebenswunder 1923):</h5>
+                  <blockquote>
+                    "Dass die Weimarer Republik das Jahr 1923 überstand, gleicht einem 'Überlebenswunder' und ist der pragmatischen Politik von Kanzler <strong>Gustav Stresemann</strong> zu verdanken: Er brach den passiven Ruhrwiderstand ab, beendete das Gelddrucken und führte die sachwertgedeckte <strong>Rentenmark</strong> ein, was die Währung sofort stabilisierte. Doch obwohl die Republik überlebte, blieben die tiefen psychologischen Traumata der Inflation im kollektiven Gedächtnis des Bürgertums verankert und bildeten Jahre später den Nährboden für die NSDAP."
+                  </blockquote>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Fixed Bottom Gamification Dashboard (XP and Level) -->
+  <div class="gamified-xp-bar-fixed" id="xpDashboard">
+    <div class="container xp-bar-container">
+      <div class="level-badge" id="dashboardLevelBadge">1</div>
+      <div class="xp-progress-wrapper">
+        <div class="xp-info-labels">
+          <span>Erfahrungsstufe <strong id="levelText">Rekrut</strong></span>
+          <span id="xpText">0 / 200 XP</span>
+        </div>
+        <div class="xp-bar-outer">
+          <div class="xp-bar-inner" id="dashboardXpFill"></div>
+        </div>
+      </div>
+      <div class="xp-recent-notification" id="xpNotification" style="display: none;">+20 XP</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>KlausurHub: Erster Weltkrieg & 1923</h4>
+          <p>Dieses interaktive Lerntool wurde speziell für deine Geschichtsklausur am Freitag erstellt. Nutze es, um die komplexen Zusammenhänge von der Julikrise über die Industrialisierung des Krieges bis hin zur Stabilisierung der Weimarer Republik im Jahr 1923 zu meistern.</p>
+        </div>
+        <div class="footer-links">
+          <h5>Lernbereiche</h5>
+          <ul>
+            <li><a href="#timeline">Interaktive Zeitleiste</a></li>
+            <li><a href="#decisions">Schicksalstheater</a></li>
+            <li><a href="#trainer">Klausur-Methoden</a></li>
+            <li><a href="#flashcards">Lernkarten</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h5>Wichtige Themen</h5>
+          <ul>
+            <li><a href="#decisions">Julikrise 1914</a></li>
+            <li><a href="#decisions">Abnutzungskrieg 1916</a></li>
+            <li><a href="#decisions">Novemberrevolution 1918</a></li>
+            <li><a href="#decisions">Währungsstabilisierung 1923</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Antigravity AI Coding Assistant. Viel Erfolg bei deiner Klausur am Freitag! Du schaffst das!</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MrWissen2go Express-Crashkurs Overlay Modal -->
+  <div id="crashkursModal" class="crashkurs-modal-overlay" style="display: none;">
+    <div class="crashkurs-modal-card glass-card">
+      <button class="crashkurs-close-btn" id="closeCrashkursBtn" aria-label="Crashkurs schließen">×</button>
+      
+      <div class="crashkurs-header">
+        <span class="crashkurs-badge">⚡ KLAUSUR-CRASHKURS</span>
+        <h2>MrWissen2go Express</h2>
+        <p>In 5 Minuten das absolute Prüfungswissen von den Spannungen 1914 bis zum Aufstieg radikaler Parteien 1923.</p>
+      </div>
+
+      <div class="crashkurs-player-container">
+        <!-- Progress steps dots -->
+        <div class="crashkurs-steps-indicator" id="crashkursSteps">
+          <span class="step-dot active" data-step="0">1</span>
+          <span class="step-dot" data-step="1">2</span>
+          <span class="step-dot" data-step="2">3</span>
+          <span class="step-dot" data-step="3">4</span>
+          <span class="step-dot" data-step="4">5</span>
+        </div>
+
+        <div class="crashkurs-screen">
+          <div class="crashkurs-avatar-row">
+            <div class="mrwissen-avatar">🎓</div>
+            <div class="mrwissen-bubble">
+              <p id="crashkursNarratorText">Hallo! Ich bin dein digitaler Geschichtstrainer. Klicke auf 'Starten', um den Express-Ritt durch die wichtigsten Klausurthemen zu beginnen!</p>
+            </div>
+          </div>
+
+          <div class="crashkurs-content-box" id="crashkursContentBox" style="display: none;">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <div class="crashkurs-footer">
+          <button class="btn btn-secondary" id="crashkursPrevBtn" style="display: none;">Zurück</button>
+          <button class="btn btn-primary" id="crashkursNextBtn">Starten</button>
+        </div>
+      </div>
+    </div>
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav">
+    <a href="#timeline" class="mobile-nav-link active">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+      <span>Timeline</span>
+    </a>
+    <a href="#decisions" class="mobile-nav-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+      <span>Entscheidung</span>
+    </a>
+    <a href="#trainer" class="mobile-nav-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><line x1="10" y1="9" x2="8" y2="9"></line></svg>
+      <span>Trainer</span>
+    </a>
+    <a href="#flashcards" class="mobile-nav-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="13" y2="17"></line></svg>
+      <span>Lernkarten</span>
+    </a>
+    <a href="#quiz" class="mobile-nav-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+      <span>Quiz</span>
+    </a>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
