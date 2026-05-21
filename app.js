@@ -504,6 +504,15 @@ function formatText(text) {
   return text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
 }
 
+// Fisher-Yates array shuffling utility
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
 // Globals for Gamification State
 let gameState = {
   xp: 0,
@@ -1355,7 +1364,7 @@ function loadQuizQuestion() {
   qText.innerHTML = formatText(currentQ.question);
 
   // Shuffled options
-  const shuffledOpts = [...currentQ.options];
+  const shuffledOpts = shuffleArray([...currentQ.options]);
 
   shuffledOpts.forEach((opt) => {
     const btn = document.createElement("button");
