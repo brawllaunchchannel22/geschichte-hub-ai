@@ -976,7 +976,8 @@ section {
 
 .flashcard-wrapper {
   perspective: 1000px;
-  height: 240px;
+  min-height: 240px;
+  height: auto;
 }
 
 .flashcard {
@@ -1493,6 +1494,11 @@ footer {
   }
 }
 
+@media (max-width: 600px) {
+  .flashcard-front, .flashcard-back {padding: 1rem;}
+}
+
+
 /* 7. Quiz Upgrades (Blitz-Modus & Streaks) & Klausur-Spickzettel styles */
 .quiz-controls-row {
   display: flex;
@@ -1848,7 +1854,7 @@ html[data-theme="dark"] .klausur-formulierung h5 {
   flex-direction: column;
   border: 2px solid var(--accent-gold);
   box-shadow: 0 0 35px var(--accent-gold-glow);
-  padding: 2.5rem !important;
+  padding: 1rem !important;
 }
 
 .crashkurs-close-btn {
