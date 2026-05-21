@@ -1740,7 +1740,7 @@ function handleQuizAnswer(clickedBtn, selectedOption, questionObj) {
     }
   }
 
-  // Show detailed history explanation (Mirko MrWissen2go narrative)
+  // Show detailed history explanation (Expert historical narrative)
   expText.innerHTML = formatText(questionObj.explanation);
   expBox.classList.add("active");
 
@@ -1826,7 +1826,7 @@ function showQuizResults() {
 
   const percentage = (gameState.quizScore / gameState.shuffledQuestions.length) * 100;
 
-  // Dynamic feedback copy (MrWissen2go style)
+  // Dynamic feedback copy (Expert learning feedback style)
   if (percentage >= 85) {
     resTitle.innerText = "🏆 Herausragend! Du bist ein absolutes Geschichts-Genie!";
     resText.innerText = `Unglaublich! Mit ${gameState.quizScore} von ${gameState.shuffledQuestions.length} Punkten hast du bewiesen, dass du die komplexen Dynamiken von der Julikrise über die blutigen Materialschlachten bis hin zur Währungsstabilisierung 1923 verinnerlicht hast. Mit diesem profunden Wissen bist du hervorragend aufgestellt, um historische Zusammenhänge differenziert zu analysieren und zu bewerten!`;
@@ -2209,7 +2209,7 @@ function initSandboxPractice() {
 const crashkursData = [
   {
     title: "1. Das Pulverfass & Der Funke (1914)",
-    text: "Moin Leute! Vor 1914 brodelte Europa. Der Grund? **Aggressiver Imperialismus** und das heftige **Flottenwettrüsten** zwischen Deutschland und England. Europa war geteilt: Triple Entente (GB, FR, RU) gegen Mittelmächte (DE, AT). Das Attentat von Sarajevo am 28. Juni 1914 war dann der Funke im Pulverfass. Mit dem deutschen **Blankoscheck** eskalierte die Julikrise.",
+    text: "Willkommen zum Crashkurs! Vor 1914 brodelte Europa. Der Grund? **Aggressiver Imperialismus** und das heftige **Flottenwettrüsten** zwischen Deutschland und England. Europa war geteilt: Triple Entente (GB, FR, RU) gegen Mittelmächte (DE, AT). Das Attentat von Sarajevo am 28. Juni 1914 war dann der Funke im Pulverfass. Mit dem deutschen **Blankoscheck** eskalierte die Julikrise.",
     points: [
       "Imperialismus und Wettrüsten schufen extreme Spannungen.",
       "Sarajevo war der Auslöser, nicht die tiefere Ursache.",
