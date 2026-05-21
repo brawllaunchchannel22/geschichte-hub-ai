@@ -2366,7 +2366,7 @@ function renderCrashkursStep() {
   if (contentBox) {
     contentBox.style.display = "none";
   }
-  const introBubble = `Mirko sagt: "Schauen wir uns Thema ${activeCrashkursStep + 1} an: ${step.title}..."`;
+  const introBubble = `Dein Geschichts-Trainer sagt: "Schauen wir uns Thema ${activeCrashkursStep + 1} an: ${step.title}..."`;
   
   if (narratorText) {
     typewriter(narratorText, introBubble, 10, () => {

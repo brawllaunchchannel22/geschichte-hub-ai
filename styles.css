@@ -1992,7 +1992,7 @@ html[data-theme="dark"] .klausur-formulierung h5 {
   align-items: flex-start;
 }
 
-.mrwissen-avatar {
+.mentor-avatar {
   font-size: 2.8rem;
   background: var(--accent-bg);
   border-radius: 50%;
@@ -2005,7 +2005,7 @@ html[data-theme="dark"] .klausur-formulierung h5 {
   flex-shrink: 0;
 }
 
-.mrwissen-bubble {
+.mentor-bubble {
   background: rgba(var(--card-bg-rgb), 0.9);
   border: 1px solid rgba(var(--border-rgb), 0.1);
   padding: 1.2rem;
@@ -2014,7 +2014,7 @@ html[data-theme="dark"] .klausur-formulierung h5 {
   flex-grow: 1;
 }
 
-.mrwissen-bubble::before {
+.mentor-bubble::before {
   content: '';
   position: absolute;
   top: 0;
@@ -2026,7 +2026,7 @@ html[data-theme="dark"] .klausur-formulierung h5 {
   border-color: transparent rgba(var(--border-rgb), 0.1) transparent transparent;
 }
 
-.mrwissen-bubble p {
+.mentor-bubble p {
   margin-bottom: 0;
   font-size: 1.05rem;
   line-height: 1.6;
